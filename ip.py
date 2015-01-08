@@ -41,7 +41,7 @@ class IPIndicator:
             req = req.json()
             res = '{city}:{sep}{ip}'.format(sep=' '*5, **req),  req['country_code'].lower()
         except:
-            res = 'No connection with geo ip service.', 'index'
+            res = 'No connection with geoip service.', 'index'
         return res
 
     def _refresh(self):
