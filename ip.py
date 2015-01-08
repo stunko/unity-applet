@@ -10,7 +10,7 @@ from collections import namedtuple
 Resources = namedtuple('Resources', ("icon", "url", "period"))
 
 resources = Resources(
-    os.path.abspath("./images/flags"),
+    os.path.join(os.path.dirname(__file__), "images/flags"),
     'http://www.telize.com/geoip',
     10000)
 
