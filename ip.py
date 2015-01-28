@@ -36,13 +36,16 @@ class IPIndicator:
     @property
     def ip_geo_info(self):
         try:
-            req = requests.get(resources.url, timeout=10)
-            req.raise_for_status()
-            req = req.json()
-            res = '{city}:{sep}{ip}'.format(sep=' '*5, **req),  req['country_code'].lower()
-        except:
-            res = 'No connection with geoip service.', 'index'
-        return res
+            resp = requests.get(resources.url, timeout=10)
+            resp.raise_for_status()
+            resp = resp.json()
+            result = '{city}:{sep}{ip}'.format(
+                city=resp.get('city', 'Tunnel used'),
+                sep=' '*5,
+                **resp),  resp['country_code'].lower()
+        except Exception as e:
+            result = 'No connection with geoip service.', 'index'
+        return result
 
     def _refresh(self):
         ip, flag = self.ip_geo_info
