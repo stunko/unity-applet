@@ -39,10 +39,10 @@ class IPIndicator:
             resp = requests.get(resources.url, timeout=10)
             resp.raise_for_status()
             resp = resp.json()
-            result = '{city}:{sep}{ip}'.format(
-                city=resp.get('city', 'Tunnel used'),
+            result = '{cty}:{sep}{ip}'.format(
+                cty=resp.get('city', 'Tunnel used'),
                 sep=' '*5,
-                **resp),  resp['country_code'].lower()
+                **resp),  resp.get('country_code', 'index').lower()
         except Exception as e:
             result = 'No connection with geoip service.', 'index'
         return result
